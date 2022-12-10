@@ -1,0 +1,18 @@
+.trip-container {
+    flex: 1;
+}
+.time {
+    position: absolute;
+    margin: 0;
+    width: 100%;
+    top: 1%;
+    color: white;
+    text-align: center;
+}
+#slider {
+    width: 30%;
+    height: 10%;
+    position: absolute;
+    left: 35%;
+    top: 85%;
+}
