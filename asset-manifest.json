@@ -1,0 +1,18 @@
+{
+  "files": {
+    "main.css": "/Kaist-campus/static/css/main.0967ac4a.css",
+    "main.js": "/Kaist-campus/static/js/main.2bf7e9e5.js",
+    "static/js/483.8554fed2.chunk.js": "/Kaist-campus/static/js/483.8554fed2.chunk.js",
+    "static/js/787.0682a3ae.chunk.js": "/Kaist-campus/static/js/787.0682a3ae.chunk.js",
+    "service-worker.js": "/Kaist-campus/service-worker.js",
+    "index.html": "/Kaist-campus/index.html",
+    "main.0967ac4a.css.map": "/Kaist-campus/static/css/main.0967ac4a.css.map",
+    "main.2bf7e9e5.js.map": "/Kaist-campus/static/js/main.2bf7e9e5.js.map",
+    "483.8554fed2.chunk.js.map": "/Kaist-campus/static/js/483.8554fed2.chunk.js.map",
+    "787.0682a3ae.chunk.js.map": "/Kaist-campus/static/js/787.0682a3ae.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.0967ac4a.css",
+    "static/js/main.2bf7e9e5.js"
+  ]
+}
