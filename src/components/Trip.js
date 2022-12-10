@@ -45,7 +45,7 @@ const INITIAL_VIEW_STATE = {
 };
 
 const mapStyle = 'mapbox://styles/spear5306/ckzcz5m8w002814o2coz02sjc';
-const MAPBOX_TOKEN = `pk.eyJ1Ijoic3BlYXI1MzA2IiwiYSI6ImNremN5Z2FrOTI0ZGgycm45Mzh3dDV6OWQifQ.kXGWHPRjnVAEHgVgLzXn2g`;
+const MAPBOX_TOKEN = `pk.eyJ1Ijoic3BlYXI1MzA2IiwiYSI6ImNremN5Z2FrOTI0ZGgycm45Mzh3dDV6OWQifQ.kXGWHPRjnVAEHgVgLzXn2g`; // eslint-disable-line
 
 const ICON_MAPPING = {
     marker: {x: 0, y: 0, width: 128, height: 128, mask: true}
