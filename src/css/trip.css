@@ -1,6 +1,7 @@
 .trip-container {
     flex: 1;
 }
+
 .time {
     position: absolute;
     margin: 0;

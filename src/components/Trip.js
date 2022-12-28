@@ -4,6 +4,7 @@ import { Map } from 'react-map-gl';
 import {AmbientLight, PointLight, LightingEffect} from '@deck.gl/core';
 import { TripsLayer } from '@deck.gl/geo-layers';
 import { IconLayer, PathLayer } from '@deck.gl/layers';
+import Slider from "@mui/material/Slider";
 import '../css/trip.css';
 
 const ambientLight = new AmbientLight({
@@ -55,12 +56,13 @@ const Trip = props => {
     const minTime = props.minTime;
     const maxTime = props.maxTime;
     const time = props.time;
-    const animationSpeed = 2;
+    const animationSpeed = 1;
 
     const busStopPoint = props.busStopPoint;
     const busStopPath = props.busStopPath;
     const busTrip = props.busTrip;
     const carTrip = props.carTrip;
+    const busPassenger = props.busPassenger;
 
     const [animationFrame, setAnimationFrame] = useState('');
 
@@ -75,6 +77,7 @@ const Trip = props => {
         const af = window.requestAnimationFrame(animate);
         setAnimationFrame(af);
     };
+
     const layers = [
         new PathLayer({
             id: 'bus-stop-path',
@@ -126,12 +129,30 @@ const Trip = props => {
             currentTime: time,
             shadowEnabled: false,
         }),
+        new TripsLayer({
+            id: 'bus-passenger',
+            data: busPassenger,
+            getPath: d => d.trip,
+            getTimestamps: d => d.timestamp,
+            getColor: [220, 180, 140],
+            opacity: 1,
+            widthMinPixels: 5,
+            trailLength: 1,
+            rounded: true,
+            currentTime: time,
+            shadowEnabled: false,
+        }),
     ];
 
     useEffect(() => {
         animate();
         return () => window.cancelAnimationFrame(animationFrame);
     }, []);
+
+    const SliderChange = (value) => {
+        const time = value.target.value;
+        props.setTime(time);
+    };
 
     return (
         <div className='trip-container' style={{position: 'relative'}}>
@@ -149,7 +170,14 @@ const Trip = props => {
         <h1 className='time'>
             TIME : {(String(parseInt(Math.round(time) / 60) % 24).length === 2) ? parseInt(Math.round(time) / 60) % 24 : '0'+String(parseInt(Math.round(time) / 60) % 24)} : {(String(Math.round(time) % 60).length === 2) ? Math.round(time) % 60 : '0'+String(Math.round(time) % 60)}
         </h1>
-        {/* <img className='legend' src={legend}></img> */}
+        <Slider
+            id="slider"
+            value={time}
+            min={minTime}
+            max={maxTime}
+            onChange={SliderChange}
+            track="inverted"
+          />
         </div>
     )
 }

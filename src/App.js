@@ -1,6 +1,5 @@
 import "mapbox-gl/dist/mapbox-gl.css";
 import React, { useState, useEffect } from "react";
-import Slider from "@mui/material/Slider";
 import axios from "axios";
 import Trip from "./components/Trip";
 import "./css/app.css";
@@ -19,6 +18,7 @@ const App = () => {
   const [busStopPath, setBusStopPath] = useState([]);
   const [busTrip, setBusTrip] = useState([]);
   const [carTrip, setCarTrip] = useState([]);
+  const [busPassenger, setBusPassenger] = useState([]);
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
@@ -27,12 +27,20 @@ const App = () => {
       const bus_stop_point = await getData("bus_stop_point");
       const bus_stop_path = await getData("bus_stop_path");
       const bus_trip = await getData("bus_trip");
+      const bus_passenger = await getData("bus_passenger");
 
-      if (car_trip && bus_stop_point && bus_stop_path && bus_trip) {
+      if (
+        car_trip &&
+        bus_stop_point &&
+        bus_stop_path &&
+        bus_trip &&
+        bus_passenger
+      ) {
         setCarTrip((prev) => car_trip);
         setBusStopPoint((prev) => bus_stop_point);
         setBusStopPath((prev) => bus_stop_path);
         setBusTrip((prev) => bus_trip);
+        setBusPassenger((prev) => bus_passenger);
         setLoaded(true);
       }
     };
@@ -40,15 +48,20 @@ const App = () => {
     getFetchData();
   }, []);
 
-  const SliderChange = (value) => {
-    const time = value.target.value;
-    setTime(time);
-  };
-
   return (
     <div className="container">
       {loaded ? (
         <>
+          <Trip
+            busStopPoint={busStopPoint}
+            busStopPath={busStopPath}
+            busTrip={busTrip}
+            busPassenger={busPassenger}
+            minTime={minTime}
+            maxTime={maxTime}
+            time={time}
+            setTime={setTime}
+          ></Trip>
           <Trip
             busStopPoint={busStopPoint}
             busStopPath={busStopPath}
@@ -59,14 +72,7 @@ const App = () => {
             time={time}
             setTime={setTime}
           ></Trip>
-          <Slider
-            id="slider"
-            value={time}
-            min={minTime}
-            max={maxTime}
-            onChange={SliderChange}
-            track="inverted"
-          />
+
         </>
       ) : (
         <></>
