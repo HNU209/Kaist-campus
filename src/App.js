@@ -2,6 +2,7 @@ import "mapbox-gl/dist/mapbox-gl.css";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Trip from "./components/Trip";
+import Splash from "./components/Splash";
 import "./css/app.css";
 
 const getData = (name) => {
@@ -50,7 +51,7 @@ const App = () => {
 
   return (
     <div className="container">
-      {loaded ? (
+      {loaded ?
         <>
           <Trip
             busStopPoint={busStopPoint}
@@ -74,9 +75,9 @@ const App = () => {
           ></Trip>
 
         </>
-      ) : (
-        <></>
-      )}
+      :
+      <Splash></Splash>
+      }
     </div>
   );
 };

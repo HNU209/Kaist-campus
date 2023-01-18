@@ -6,6 +6,7 @@ import { TripsLayer } from '@deck.gl/geo-layers';
 import { IconLayer, PathLayer } from '@deck.gl/layers';
 import Slider from "@mui/material/Slider";
 import '../css/trip.css';
+import legend from '../img/legend.png';
 
 const ambientLight = new AmbientLight({
     color: [255, 255, 255],
@@ -167,17 +168,18 @@ const Trip = props => {
                 mapboxAccessToken={MAPBOX_TOKEN}
                 />
             </DeckGL>
-        <h1 className='time'>
-            TIME : {(String(parseInt(Math.round(time) / 60) % 24).length === 2) ? parseInt(Math.round(time) / 60) % 24 : '0'+String(parseInt(Math.round(time) / 60) % 24)} : {(String(Math.round(time) % 60).length === 2) ? Math.round(time) % 60 : '0'+String(Math.round(time) % 60)}
-        </h1>
-        <Slider
-            id="slider"
-            value={time}
-            min={minTime}
-            max={maxTime}
-            onChange={SliderChange}
-            track="inverted"
-          />
+            <h1 className='time'>
+                TIME : {(String(parseInt(Math.round(time) / 60) % 24).length === 2) ? parseInt(Math.round(time) / 60) % 24 : '0'+String(parseInt(Math.round(time) / 60) % 24)} : {(String(Math.round(time) % 60).length === 2) ? Math.round(time) % 60 : '0'+String(Math.round(time) % 60)}
+            </h1>
+            <Slider
+                id="slider"
+                value={time}
+                min={minTime}
+                max={maxTime}
+                onChange={SliderChange}
+                track="inverted"
+            />
+            <img className='legend' src={legend}></img>
         </div>
     )
 }

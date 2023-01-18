@@ -17,3 +17,10 @@
     left: 35%;
     top: 85%;
 }
+.legend {
+    position: absolute;
+    bottom: 0%;
+    right: 0%;
+    width: 20rem;
+    height: 5rem;
+}
