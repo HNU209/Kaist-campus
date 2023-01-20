@@ -6,8 +6,7 @@ import Splash from "./components/Splash";
 import "./css/app.css";
 
 const getData = (name) => {
-  const res = axios.get(`data/${name}.json`);
-  // const res = axios.get(`https://raw.githubusercontent.com/HNU209/Kaist-campus/main/src/data/${name}.json`);
+  const res = axios.get(`https://raw.githubusercontent.com/HNU209/Kaist-campus/main/src/data/${name}.json`);
   const data = res.then((r) => r.data);
   return data;
 };
