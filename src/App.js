@@ -6,7 +6,8 @@ import Splash from "./components/Splash";
 import "./css/app.css";
 
 const getData = (name) => {
-  const res = axios.get(`https://raw.githubusercontent.com/HNU209/Kaist-campus/main/src/data/${name}.json`);
+  const res = axios.get(`data/${name}.json`);
+  // const res = axios.get(`https://raw.githubusercontent.com/HNU209/Kaist-campus/main/src/data/${name}.json`);
   const data = res.then((r) => r.data);
   return data;
 };
@@ -15,33 +16,27 @@ const App = () => {
   const minTime = 480;
   const maxTime = 660;
   const [time, setTime] = useState(minTime);
-  const [busStopPoint, setBusStopPoint] = useState([]);
-  const [busStopPath, setBusStopPath] = useState([]);
+  const [electricCarTrip, setElectricCarTrip] = useState([]);
   const [busTrip, setBusTrip] = useState([]);
-  const [carTrip, setCarTrip] = useState([]);
-  const [busPassenger, setBusPassenger] = useState([]);
+  const [busFoot, setBusFoot] = useState([]);
+  const [busStopLoc, setBusStopLoc] = useState([]);
+  const [busPath, setBusPath] = useState([]);
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
     const getFetchData = async () => {
-      const car_trip = await getData("trip");
-      const bus_stop_point = await getData("bus_stop_point");
-      const bus_stop_path = await getData("bus_stop_path");
-      const bus_trip = await getData("bus_trip");
-      const bus_passenger = await getData("bus_passenger");
+      const electricCarTrip = await getData("electric_car_trip");
+      const busTrip = await getData("bus_trip");
+      const busFoot = await getData("bus_foot");
+      const busStopLoc = await getData("bus_stop_point");
+      const busPath = await getData("bus_stop_path");
 
-      if (
-        car_trip &&
-        bus_stop_point &&
-        bus_stop_path &&
-        bus_trip &&
-        bus_passenger
-      ) {
-        setCarTrip((prev) => car_trip);
-        setBusStopPoint((prev) => bus_stop_point);
-        setBusStopPath((prev) => bus_stop_path);
-        setBusTrip((prev) => bus_trip);
-        setBusPassenger((prev) => bus_passenger);
+      if (electricCarTrip && busStopLoc && busPath && busTrip && busFoot) {
+        setElectricCarTrip((prev) => electricCarTrip);
+        setBusTrip((prev) => busTrip);
+        setBusFoot((prev) => busFoot);
+        setBusStopLoc((prev) => busStopLoc);
+        setBusPath((prev) => busPath);
         setLoaded(true);
       }
     };
@@ -51,33 +46,29 @@ const App = () => {
 
   return (
     <div className="container">
-      {loaded ?
+      {loaded ? (
         <>
           <Trip
-            busStopPoint={busStopPoint}
-            busStopPath={busStopPath}
             busTrip={busTrip}
-            busPassenger={busPassenger}
+            busFoot={busFoot}
+            busStopLoc={busStopLoc}
+            busPath={busPath}
             minTime={minTime}
             maxTime={maxTime}
             time={time}
             setTime={setTime}
           ></Trip>
           <Trip
-            busStopPoint={busStopPoint}
-            busStopPath={busStopPath}
-            carTrip={carTrip}
-            busTrip={busTrip}
+            electricCarTrip={electricCarTrip}
             minTime={minTime}
             maxTime={maxTime}
             time={time}
             setTime={setTime}
           ></Trip>
-
         </>
-      :
-      <Splash></Splash>
-      }
+      ) : (
+        <Splash></Splash>
+      )}
     </div>
   );
 };

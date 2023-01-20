@@ -59,11 +59,11 @@ const Trip = props => {
     const time = props.time;
     const animationSpeed = 1;
 
-    const busStopPoint = props.busStopPoint;
-    const busStopPath = props.busStopPath;
+    const electricCarTrip = props.electricCarTrip;
     const busTrip = props.busTrip;
-    const carTrip = props.carTrip;
-    const busPassenger = props.busPassenger;
+    const busFoot = props.busFoot;
+    const busStopLoc = props.busStopLoc;
+    const busPath = props.busPath;
 
     const [animationFrame, setAnimationFrame] = useState('');
 
@@ -82,27 +82,13 @@ const Trip = props => {
     const layers = [
         new PathLayer({
             id: 'bus-stop-path',
-            data: busStopPath,
+            data: busPath,
             pickable: true,
             widthScale: 1,
             widthMinPixels: 2,
             getPath: d => d.path,
-            getColor: d => d.type === 1 ? [255, 0, 0] : [255, 255, 0],
+            getColor: d => [255, 255, 0],
             getWidth: d => 1
-        }),
-        new IconLayer({
-            id: 'bus-stop-point',
-            data: busStopPoint,
-            pickable: false,
-            iconAtlas: 'https://raw.githubusercontent.com/visgl/deck.gl-data/master/website/icon-atlas.png',
-            iconMapping: ICON_MAPPING,
-            sizeMinPixels: 20,
-            sizeMaxPixels: 20,
-            sizeScale: 5,
-            getIcon: d => 'marker',
-            getPosition: d => d.loc,
-            getSize: d => 10,
-            getColor: d => d.type === 1 ? [255, 0, 0] : [255, 255, 0]
         }),
         new TripsLayer({
             id: 'bus-trip',
@@ -118,11 +104,11 @@ const Trip = props => {
             shadowEnabled: false,
         }),
         new TripsLayer({
-            id: 'car-trip',
-            data: carTrip,
+            id: 'bus-foot',
+            data: busFoot,
             getPath: d => d.trip,
             getTimestamps: d => d.timestamp,
-            getColor: d => d.type === 'munji' ? [0, 255, 0] : [0, 0, 255],
+            getColor: [255, 255, 255],
             opacity: 1,
             widthMinPixels: 5,
             trailLength: 1,
@@ -131,17 +117,31 @@ const Trip = props => {
             shadowEnabled: false,
         }),
         new TripsLayer({
-            id: 'bus-passenger',
-            data: busPassenger,
+            id: 'car-trip',
+            data: electricCarTrip,
             getPath: d => d.trip,
             getTimestamps: d => d.timestamp,
-            getColor: [220, 180, 140],
+            getColor: d => d.type === 'electric_car' ? [0, 0, 255] : [255, 255, 255],
             opacity: 1,
             widthMinPixels: 5,
             trailLength: 1,
             rounded: true,
             currentTime: time,
             shadowEnabled: false,
+        }),
+        new IconLayer({
+            id: 'bus-stop-point',
+            data: busStopLoc,
+            pickable: false,
+            iconAtlas: 'https://raw.githubusercontent.com/visgl/deck.gl-data/master/website/icon-atlas.png',
+            iconMapping: ICON_MAPPING,
+            sizeMinPixels: 20,
+            sizeMaxPixels: 20,
+            sizeScale: 5,
+            getIcon: d => 'marker',
+            getPosition: d => d.loc,
+            getSize: d => 10,
+            getColor: d => [255, 255, 0]
         }),
     ];
 
