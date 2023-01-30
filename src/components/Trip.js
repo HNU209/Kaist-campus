@@ -90,6 +90,16 @@ const Trip = (props) => {
   }, [animation, animate]);
 
   const layers = [
+    new PathLayer({
+      id: "bus-stop-path",
+      data: busPath,
+      pickable: true,
+      widthScale: 1,
+      widthMinPixels: 2,
+      getPath: (d) => d.path,
+      getColor: (d) => [255, 255, 0],
+      getWidth: (d) => 1,
+    }),
     new TripsLayer({
       id: "bus-trip",
       data: busTrip,
@@ -126,16 +136,6 @@ const Trip = (props) => {
       trailLength: 1,
       currentTime: time,
       shadowEnabled: false,
-    }),
-    new PathLayer({
-      id: "bus-stop-path",
-      data: busPath,
-      pickable: true,
-      widthScale: 1,
-      widthMinPixels: 2,
-      getPath: (d) => d.path,
-      getColor: (d) => [255, 255, 0],
-      getWidth: (d) => 1,
     }),
     new IconLayer({
       id: "bus-stop-point",
